@@ -1,0 +1,9 @@
+{
+  "name": "mygame",
+  "version": "1.0.0",
+  "description": "生物探索ゲーム",
+  "main": "index.js",
+  "dependencies": {
+    "openai": "^4.0.0"
+  }
+}
