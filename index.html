@@ -1,122 +1,73 @@
-/* -------------------- 全体 -------------------- */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Yu Mincho", "Times New Roman", serif;
-  background: linear-gradient(to bottom, #fdf5e6, #f5e0c8);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  color: #3b2f2f;
-}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>古文書風ゲーム導入</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="container">
+    <!-- 表紙ページ -->
+    <div class="page" id="page-cover">
+      <h1>『生物探索の記録』</h1>
+      <p>古の書物のように、君と生物の物語がここに刻まれる。</p>
+      <button onclick="nextPage()">開く</button>
+    </div>
 
-/* 紙っぽい細かい縦線ノイズ */
-body::after {
-  content: "";
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  pointer-events:none;
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(255,255,255,0.02) 0,
-    rgba(255,255,255,0.02) 1px,
-    transparent 1px,
-    transparent 5px
-  );
-  z-index: 0;
-}
+    <!-- 導入ページ -->
+    <div class="page" id="page-intro" style="display:none;">
+      <h2>物語の始まり</h2>
+      <p>
+        君は若き研究者。未知の生物と出会うため、遠く離れた湖畔、高原、山の地に赴く。
+        最初のパートナーを選び、この世界の謎を解き明かすのだ。
+      </p>
+      <button onclick="nextPage()">次へ</button>
+    </div>
 
-/* -------------------- コンテナ -------------------- */
-#container {
-  max-width: 700px;
-  width: 95%;
-  height: 80vh;          /* ページ高さ固定 */
-  perspective: 1200px;
-  margin: 20px 0;
-  position: relative;
-  overflow-y: auto;      /* 長文はスクロール可能 */
-  z-index: 1;
-}
+    <!-- パートナー選択ページ -->
+    <div class="page" id="page-partner" style="display:none;">
+      <h2>最初のパートナーを選ぶ</h2>
+      <p>どのフィールドに挑むかによって、最初の生物が変わる。</p>
+      <button onclick="selectPartner('rivarett')">湖畔のリヴァレット</button>
+      <button onclick="selectPartner('alpia')">高原のアルピア</button>
+      <button onclick="selectPartner('gardring')">山のガードリング</button>
+    </div>
 
-/* -------------------- ページ -------------------- */
-.page {
-  width: 100%;
-  background-color: #fcf4e3;
-  border: 2px solid #c9b99f;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15), inset 0 0 10px rgba(0,0,0,0.05);
-  padding: 25px 30px;
-  position: absolute;
-  backface-visibility: hidden;
-  transform-origin: left;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  font-size: 1.2rem;      /* 大きめ文字 */
-  line-height: 1.8;
-}
+    <!-- 確認ページ -->
+    <div class="page" id="page-confirm" style="display:none;">
+      <h2>契約成立</h2>
+      <p id="partner-name">パートナー名</p>
+      <p>これから共に旅をすることになる。</p>
+      <button onclick="startGame()">旅を始める</button>
+    </div>
+  </div>
 
-/* ページ内画像 */
-.page img {
-  max-width: 80%;
-  display: block;
-  margin: 15px auto;
-  border-radius: 8px;
-  border: 1px solid #d0c1a0;
-}
+  <script>
+    let currentPage = 0;
+    const pages = ["page-cover", "page-intro", "page-partner", "page-confirm"];
+    let selectedPartner = "";
 
-/* -------------------- ヘッダー装飾 -------------------- */
-.page h1::after, .page h2::after {
-  content: "∼∼∼";
-  display: block;
-  text-align: center;
-  margin-top: 5px;
-  color: #a58f7f;
-}
+    function nextPage() {
+      document.getElementById(pages[currentPage]).style.display = "none";
+      currentPage++;
+      if (currentPage < pages.length) {
+        document.getElementById(pages[currentPage]).style.display = "block";
+      }
+    }
 
-/* -------------------- ボタン -------------------- */
-button {
-  font-size: 1.1rem;
-  padding: 12px 20px;
-  margin: 15px auto;
-  border-radius: 10px;
-  border: 1px solid #b79d7f;
-  background-color: #f7e6d0;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-  cursor: pointer;
-  display: block;
-}
+    function selectPartner(name) {
+      selectedPartner = name;
+      document.getElementById("partner-name").textContent = name;
+      nextPage();
+      // cookieに保存
+      document.cookie = `partner=${name}; path=/`;
+    }
 
-button:hover {
-  background-color: #f2dca8;
-  box-shadow: 2px 3px 6px rgba(0,0,0,0.3);
-}
-
-/* -------------------- ページ影・古紙感 -------------------- */
-.page::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
-  pointer-events: none;
-  border-radius: 12px;
-}
-
-/* -------------------- ナビゲーション -------------------- */
-#controls {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* -------------------- レスポンシブ -------------------- */
-@media screen and (max-width: 400px) {
-  .page {
-    font-size: 1rem;
-    padding: 15px 20px;
-  }
-  button {
-    font-size: 1rem;
-    padding: 10px 16px;
-  }
-}
+    function startGame() {
+      alert(`パートナー「${selectedPartner}」と共に冒険を始めます！`);
+      // ここで本編ゲームに移行
+    }
+  </script>
+</body>
+</html>
