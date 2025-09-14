@@ -19,8 +19,10 @@ export default async function handler(req, res) {
     );
 
     if (!response.ok) {
+      // デバッグ: Hugging Face からのエラーメッセージを全部返す
       const errText = await response.text();
-      return res.status(500).json({ error: errText });
+      console.error("Hugging Face API Error:", errText);
+      return res.status(response.status).json({ error: errText });
     }
 
     const arrayBuffer = await response.arrayBuffer();
@@ -29,6 +31,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({ imageUrl });
   } catch (err) {
+    console.error("Server Error:", err.message);
     res.status(500).json({ error: err.message });
   }
 }
