@@ -1,21 +1,73 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+  font-family: "Noto Sans JP", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #ccefff, #e0f7fa);
+  animation: backgroundShift 20s linear infinite;
 }
 
-h1 {
-  color: #2c3e50;
+@keyframes backgroundShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  margin-bottom: 20px;
+#field-view {
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+  height: 300px;
+  margin: 20px auto;
+  border: 2px solid #888;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  overflow: hidden;
 }
 
-#output {
-  border: 1px solid #ccc;
+#partner-image {
+  max-width: 150px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateX(-50%) translateY(0px); }
+  50% { transform: translateX(-50%) translateY(-10px); }
+  100% { transform: translateX(-50%) translateY(0px); }
+}
+
+/* 波紋エフェクト */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(200, 240, 255, 0.4);
+  animation: rippleAnim 2s ease-out forwards;
+}
+
+@keyframes rippleAnim {
+  0% { width: 0; height: 0; opacity: 0.6; }
+  100% { width: 200px; height: 200px; opacity: 0; }
+}
+
+#actions button {
+  margin: 5px;
+  padding: 10px 15px;
+}
+
+#notebook {
+  width: 80%;
+  max-width: 600px;
+  border: 2px solid #888;
+  border-radius: 8px;
   padding: 10px;
-  min-height: 100px;
-  white-space: pre-wrap;
+  background-color: #fff;
+  margin-top: 10px;
 }
