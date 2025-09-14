@@ -1,77 +1,38 @@
-const partnerImages = {
-  "リヴァレット": "22DD4CC7-41AD-4EFA-A4AF-A86754F89994.png",
-  "アルピア": "C596DC81-5141-4C88-B697-7FF160AC6245.png",
-  "ガルドリング": "083FBB2A-8199-4C89-825A-A14F8A2707EF.png"
-};
-
-const partnerDescriptions = {
-  "リヴァレット": "湖畔のパートナー。穏やかで優雅、水辺での冒険が得意。",
-  "アルピア": "高原のパートナー。好奇心旺盛で軽やかに駆け回る。",
-  "ガルドリング": "山のパートナー。頼れる相棒で険しい地形も軽々。"
-};
-
-const fieldBackgrounds = {
-  "リヴァレット": "images/lake.png",
-  "アルピア": "images/highland.png",
-  "ガルドリング": "images/mountain.png"
-};
-
-// パートナー画像更新 + cookie保存
-function updatePartner(name) {
-  document.getElementById("partner-image").src = `images/${partnerImages[name]}`;
-  document.getElementById("partner-description").textContent = partnerDescriptions[name];
-  document.getElementById("field-background").src = fieldBackgrounds[name];
-
-  document.cookie = `selectedPartner=${name}; path=/; max-age=${60*60*24*30}`;
-}
-
-// cookie読み込み
-function loadPartnerFromCookie() {
-  const cookies = document.cookie.split(";").map(c => c.trim());
-  const partnerCookie = cookies.find(c => c.startsWith("selectedPartner="));
-  if (partnerCookie) {
-    const name = partnerCookie.split("=")[1];
-    if (partnerImages[name]) {
-      updatePartner(name);
-    }
-  }
-}
-
-// ページめくり
-let currentPage = 1;
-const totalPages = 2;
-
-function showPage(page) {
-  const p1 = document.getElementById("page1");
-  const p2 = document.getElementById("page2");
-
-  if (page === 1) {
-    p1.style.transform = "rotateY(0deg)";
-    p2.style.transform = "rotateY(180deg)";
-  } else if (page === 2) {
-    p1.style.transform = "rotateY(-180deg)";
-    p2.style.transform = "rotateY(0deg)";
-  }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-  loadPartnerFromCookie();
+  const books = document.querySelectorAll(".book");
+  let selectedField = null;
 
-  document.querySelectorAll(".partner-select").forEach(btn => {
-    btn.addEventListener("click", () => {
-      updatePartner(btn.dataset.partner);
+  books.forEach(book => {
+    book.addEventListener("click", () => {
+      books.forEach(b => b.style.opacity = "0.5");
+      book.style.opacity = "1";
+      selectedField = book.dataset.field;
     });
   });
 
-  document.getElementById("nextPage").addEventListener("click", () => {
-    if (currentPage < totalPages) currentPage++;
-    showPage(currentPage);
+  document.getElementById("new-game").addEventListener("click", () => {
+    if (!selectedField) {
+      alert("まず本を選んでください");
+      return;
+    }
+    // 選んだ本のフィールドをCookieに保存してゲーム開始
+    document.cookie = `playerField=${selectedField}; path=/`;
+    alert(`新しいゲームを ${selectedField} から開始します`);
+    // ここで次の生物選択イベントに遷移する処理を呼び出す
   });
 
-  document.getElementById("prevPage").addEventListener("click", () => {
-    if (currentPage > 1) currentPage--;
-    showPage(currentPage);
+  document.getElementById("continue-game").addEventListener("click", () => {
+    // Cookieからプレイヤー情報を読み込む
+    const cookies = document.cookie.split(";").reduce((acc, c) => {
+      const [key, val] = c.trim().split("=");
+      acc[key] = val;
+      return acc;
+    }, {});
+    if (!cookies.playerField) {
+      alert("保存されたゲームがありません。新しいゲームを開始してください。");
+      return;
+    }
+    alert(`途中からゲームを ${cookies.playerField} から再開します`);
+    // ここで保存された状態からゲームを再開する処理
   });
-
-  showPage(currentPage);
 });
