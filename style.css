@@ -1,51 +1,81 @@
+/* -------------------- 全体 -------------------- */
 body {
   margin: 0;
   padding: 0;
   font-family: "Yu Mincho", "Yu Gothic", serif;
-  background-color: #fdf5e6;
+  background: #fdf5e6 url('images/paper-texture.png') repeat;
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
 }
 
+/* -------------------- コンテナ -------------------- */
 #container {
   max-width: 700px;
   width: 95%;
+  height: 80vh;          /* ページ高さ固定 */
   perspective: 1200px;
   margin: 20px 0;
   position: relative;
-  height: 600px;
+  overflow-y: auto;      /* 長文はスクロール可能 */
 }
 
+/* -------------------- ページ -------------------- */
 .page {
   width: 100%;
   background-color: #fff8dc;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  padding: 20px 25px;
+  padding: 25px 30px;
   position: absolute;
   backface-visibility: hidden;
   transform-origin: left;
-  transition: transform 0.8s ease;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  font-size: 1.2rem;      /* 大きめ文字 */
+  line-height: 1.8;
 }
 
 .page img {
   max-width: 80%;
   display: block;
-  margin: 10px auto;
+  margin: 15px auto;
   border-radius: 8px;
 }
 
+/* -------------------- ボタン -------------------- */
 button {
-  padding: 8px 14px;
-  margin: 5px;
-  border-radius: 6px;
-  cursor: pointer;
-  border: 1px solid #999;
+  font-size: 1.1rem;
+  padding: 12px 20px;
+  margin: 10px auto;
+  border-radius: 10px;
+  border: 1px solid #ccc;
   background-color: #fffaf0;
+  box-shadow: 1px 2px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
+  display: block;
 }
 
 button:hover {
   background-color: #fff0d0;
+  box-shadow: 1px 3px 6px rgba(0,0,0,0.3);
+}
+
+/* -------------------- ナビゲーション -------------------- */
+#controls {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* -------------------- レスポンシブ -------------------- */
+@media screen and (max-width: 400px) {
+  .page {
+    font-size: 1rem;
+    padding: 15px 20px;
+  }
+  button {
+    font-size: 1rem;
+    padding: 10px 16px;
+  }
 }
