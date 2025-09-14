@@ -1,114 +1,63 @@
-// ゲーム状態
-const player = {
-  name: "研究者",
-  partner: null,
-  location: null,
-  notebook: [],
-  unlockedFields: []
+// パートナー画像マッピング（UUIDファイル名）
+const partnerImages = {
+  "リヴァレット": "22DD4CC7-41AD-4EFA-A4AF-A86754F89994.png",
+  "アルピア": "C596DC81-5141-4C88-B697-7FF160AC6245.png",
+  "ガルドリング": "083FBB2A-8199-4C89-825A-A14F8A2707EF.png"
 };
 
-const partners = {
-  "リヴァレット": { image: "rivarett.png", field: "湖畔" },
-  "アルピア": { image: "alpia.png", field: "高原" },
-  "ガルドリング": { image: "gardring.png", field: "山" }
+// パートナー説明文
+const partnerDescriptions = {
+  "リヴァレット": "湖畔のパートナー。穏やかで優雅、水辺での冒険が得意。",
+  "アルピア": "高原のパートナー。好奇心旺盛で軽やかに駆け回る。",
+  "ガルドリング": "山のパートナー。頼れる相棒で険しい地形も軽々。"
 };
 
-// Cookieに保存
-function savePlayerData() {
-  const playerData = {
-    name: player.name,
-    partner: player.partner,
-    location: player.location,
-    notebook: player.notebook
-  };
-  document.cookie = "playerData=" + encodeURIComponent(JSON.stringify(playerData)) + "; path=/; max-age=" + (60*60*24*7);
+// フィールド背景画像
+const fieldBackgrounds = {
+  "リヴァレット": "images/lake.png",
+  "アルピア": "images/highland.png",
+  "ガルドリング": "images/mountain.png"
+};
+
+// パートナー選択時に画像・背景・説明を更新
+function updatePartnerImage(name) {
+  // パートナー画像
+  const imgElement = document.getElementById("partner-image");
+  imgElement.src = partnerImages[name] ? `images/${partnerImages[name]}` : "";
+
+  // パートナー説明
+  const descElement = document.getElementById("partner-description");
+  descElement.textContent = partnerDescriptions[name] || "";
+
+  // フィールド背景
+  const bgElement = document.getElementById("field-background");
+  bgElement.src = fieldBackgrounds[name] || "";
+
+  // cookieに保存（30日）
+  document.cookie = `selectedPartner=${name}; path=/; max-age=${60*60*24*30}`;
 }
 
-// Cookieから読み込み
-function loadPlayerData() {
-  const cookies = document.cookie.split("; ");
-  const cookie = cookies.find(c => c.startsWith("playerData="));
-  if(cookie) {
-    const data = JSON.parse(decodeURIComponent(cookie.split("=")[1]));
-    player.name = data.name;
-    player.partner = data.partner;
-    player.location = data.location;
-    player.notebook = data.notebook;
-
-    // UI更新
-    if(player.partner) {
-      showFieldView();
-      updateFieldDescription(`${player.location}に到着。${player.partner}があなたを見つめている…`);
-      updatePartnerImage(player.partner);
-      updateNotebook();
+// cookieからパートナーを読み込み
+function loadPartnerFromCookie() {
+  const cookies = document.cookie.split(";").map(c => c.trim());
+  const partnerCookie = cookies.find(c => c.startsWith("selectedPartner="));
+  if (partnerCookie) {
+    const name = partnerCookie.split("=")[1];
+    if (partnerImages[name]) {
+      updatePartnerImage(name);
     }
   }
 }
 
-// UI更新関数
-function showFieldView() {
-  document.getElementById("partner-selection").style.display = "none";
-  document.getElementById("field-view").style.display = "block";
-  document.getElementById("actions").style.display = "block";
-  document.getElementById("notebook").style.display = "block";
-}
+// 初期化
+document.addEventListener("DOMContentLoaded", () => {
+  loadPartnerFromCookie();
 
-function updateFieldDescription(text) {
-  document.getElementById("field-description").textContent = text;
-}
-
-function updatePartnerImage(name) {
-  document.getElementById("partner-image").src = `images/${name.toLowerCase()}.png`;
-}
-
-function updateNotebook() {
-  const notesUl = document.getElementById("notes");
-  notesUl.innerHTML = "";
-  player.notebook.forEach(note => {
-    const li = document.createElement("li");
-    li.textContent = note;
-    notesUl.appendChild(li);
+  // ボタンにクリックイベント
+  document.querySelectorAll(".partner-select").forEach(button => {
+    button.addEventListener("click", () => {
+      const name = button.dataset.partner;
+      updatePartnerImage(name);
+    });
   });
-}
-
-// パートナー選択
-function selectPartner(name) {
-  player.partner = name;
-  player.location = partners[name].field;
-
-  showFieldView();
-  updateFieldDescription(`${player.location}に到着。${name}があなたを見つめている…`);
-  updatePartnerImage(name);
-
-  recordObservation("契約", `${name}と契約した`);
-  savePlayerData(); // 保存
-}
-
-// ノートに記録
-function recordObservation(action, detail) {
-  const note = `${new Date().toLocaleTimeString()} - ${action}: ${detail}`;
-  player.notebook.push(note);
-  updateNotebook();
-  savePlayerData(); // 保存
-}
-
-// 操作関数
-function observe() {
-  recordObservation("観察", `${player.partner}の行動を観察した`);
-  alert(`${player.partner}が周囲を観察している…`);
-}
-
-function movePartner() {
-  recordObservation("移動", `${player.partner}を移動させた`);
-  alert(`${player.partner}が少し移動した`);
-}
-
-function collectMaterial() {
-  recordObservation("採集", `${player.partner}と共に素材を収集`);
-  alert(`小魚や植物を採集した`);
-}
-
-// ページロード時にCookieから復元
-window.addEventListener("load", () => {
-  loadPlayerData();
 });
