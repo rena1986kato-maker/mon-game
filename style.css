@@ -1,73 +1,51 @@
 body {
-  font-family: "Noto Sans JP", sans-serif;
   margin: 0;
   padding: 0;
-  height: 100vh;
-  overflow: hidden;
+  font-family: "Yu Mincho", "Yu Gothic", serif;
+  background-color: #fdf5e6;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: linear-gradient(135deg, #ccefff, #e0f7fa);
-  animation: backgroundShift 20s linear infinite;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
 }
 
-@keyframes backgroundShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-#field-view {
+#container {
+  max-width: 700px;
+  width: 95%;
+  perspective: 1200px;
+  margin: 20px 0;
   position: relative;
-  width: 80%;
-  max-width: 600px;
-  height: 300px;
-  margin: 20px auto;
-  border: 2px solid #888;
+  height: 600px;
+}
+
+.page {
+  width: 100%;
+  background-color: #fff8dc;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 20px 25px;
+  position: absolute;
+  backface-visibility: hidden;
+  transform-origin: left;
+  transition: transform 0.8s ease;
+}
+
+.page img {
+  max-width: 80%;
+  display: block;
+  margin: 10px auto;
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.8);
-  overflow: hidden;
 }
 
-#partner-image {
-  max-width: 150px;
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% { transform: translateX(-50%) translateY(0px); }
-  50% { transform: translateX(-50%) translateY(-10px); }
-  100% { transform: translateX(-50%) translateY(0px); }
-}
-
-/* 波紋エフェクト */
-.ripple {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(200, 240, 255, 0.4);
-  animation: rippleAnim 2s ease-out forwards;
-}
-
-@keyframes rippleAnim {
-  0% { width: 0; height: 0; opacity: 0.6; }
-  100% { width: 200px; height: 200px; opacity: 0; }
-}
-
-#actions button {
+button {
+  padding: 8px 14px;
   margin: 5px;
-  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid #999;
+  background-color: #fffaf0;
 }
 
-#notebook {
-  width: 80%;
-  max-width: 600px;
-  border: 2px solid #888;
-  border-radius: 8px;
-  padding: 10px;
-  background-color: #fff;
-  margin-top: 10px;
+button:hover {
+  background-color: #fff0d0;
 }
