@@ -2,102 +2,16 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>生物探索ゲーム：導入パート</title>
-<style>
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Yu Mincho", "Yu Gothic", serif;
-  background-color: #fdf5e6;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-}
-
-#container {
-  max-width: 700px;
-  width: 95%;
-  perspective: 1200px; /* 立体感 */
-  margin: 20px 0;
-}
-
-.page {
-  width: 100%;
-  background-color: #fff8dc;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  padding: 20px 25px;
-  position: absolute;
-  backface-visibility: hidden;
-  transform-origin: left;
-  transition: transform 0.8s ease;
-}
-
-.page img {
-  max-width: 80%;
-  display: block;
-  margin: 10px auto;
-  border-radius: 8px;
-}
-
-#controls {
-  margin-top: 350px;
-  text-align: center;
-  position: relative;
-  z-index: 10;
-}
-
-button {
-  padding: 8px 14px;
-  margin: 5px;
-  border-radius: 6px;
-  cursor: pointer;
-  border: 1px solid #999;
-  background-color: #fffaf0;
-}
-
-button:hover {
-  background-color: #fff0d0;
-}
-
-</style>
+<title>生物探索ゲーム</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div id="container">
-  <div class="page" id="page1">
-    <h2>最初のパートナーを選択</h2>
-    <p>
-      あなたは研究者として未知の生物を観察するために、この地に足を踏み入れた。
-      目の前にはいくつかのフィールドが広がっている。
-      どのパートナーと共に冒険を始めるか選ぶのだ。
-    </p>
-    <div style="text-align:center;">
-      <button class="partner-select" data-partner="リヴァレット">リヴァレット</button>
-      <button class="partner-select" data-partner="アルピア">アルピア</button>
-      <button class="partner-select" data-partner="ガルドリング">ガルドリング</button>
-    </div>
-    <img id="partner-image" src="" alt="パートナー画像">
-    <div id="partner-description"></div>
-  </div>
-
-  <div class="page" id="page2" style="transform: rotateY(180deg);">
-    <h2>物語の舞台</h2>
-    <img id="field-background" src="" alt="フィールド背景">
-    <p id="story">
-      選んだパートナーと共に、最初のフィールドを探索する準備が整った。
-      フィールドの風景があなたを迎え入れる。
-    </p>
-  </div>
-
-</div>
-
+<div id="container"></div>
 <div id="controls">
   <button id="prevPage">前のページ</button>
   <button id="nextPage">次のページ</button>
 </div>
 
-<script src="script.js"></script>
+<script type="module" src="main.js"></script>
 </body>
 </html>
