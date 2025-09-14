@@ -1,73 +1,31 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>古文書風ゲーム導入</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生物探索ゲーム</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="container">
-    <!-- 表紙ページ -->
-    <div class="page" id="page-cover">
-      <h1>『生物探索の記録』</h1>
-      <p>古の書物のように、君と生物の物語がここに刻まれる。</p>
-      <button onclick="nextPage()">開く</button>
+<div id="top-screen">
+  <h1>生物探索ゲーム</h1>
+  <div id="books-container">
+    <div class="book" id="book-lake" data-field="lake">
+      <img src="22DD4CC7-41AD-4EFA-A4AF-A86754F89994.png" alt="湖畔の本">
     </div>
-
-    <!-- 導入ページ -->
-    <div class="page" id="page-intro" style="display:none;">
-      <h2>物語の始まり</h2>
-      <p>
-        君は若き研究者。未知の生物と出会うため、遠く離れた湖畔、高原、山の地に赴く。
-        最初のパートナーを選び、この世界の謎を解き明かすのだ。
-      </p>
-      <button onclick="nextPage()">次へ</button>
+    <div class="book" id="book-highland" data-field="highland">
+      <img src="C596DC81-5141-4C88-B697-7FF160AC6245.png" alt="高原の本">
     </div>
-
-    <!-- パートナー選択ページ -->
-    <div class="page" id="page-partner" style="display:none;">
-      <h2>最初のパートナーを選ぶ</h2>
-      <p>どのフィールドに挑むかによって、最初の生物が変わる。</p>
-      <button onclick="selectPartner('rivarett')">湖畔のリヴァレット</button>
-      <button onclick="selectPartner('alpia')">高原のアルピア</button>
-      <button onclick="selectPartner('gardring')">山のガードリング</button>
-    </div>
-
-    <!-- 確認ページ -->
-    <div class="page" id="page-confirm" style="display:none;">
-      <h2>契約成立</h2>
-      <p id="partner-name">パートナー名</p>
-      <p>これから共に旅をすることになる。</p>
-      <button onclick="startGame()">旅を始める</button>
+    <div class="book" id="book-mountain" data-field="mountain">
+      <img src="083FBB2A-8199-4C89-825A-A14F8A2707EF.png" alt="山の本">
     </div>
   </div>
+  <div id="start-buttons">
+    <button id="new-game">初めてプレイ</button>
+    <button id="continue-game">途中からプレイ</button>
+  </div>
+</div>
 
-  <script>
-    let currentPage = 0;
-    const pages = ["page-cover", "page-intro", "page-partner", "page-confirm"];
-    let selectedPartner = "";
-
-    function nextPage() {
-      document.getElementById(pages[currentPage]).style.display = "none";
-      currentPage++;
-      if (currentPage < pages.length) {
-        document.getElementById(pages[currentPage]).style.display = "block";
-      }
-    }
-
-    function selectPartner(name) {
-      selectedPartner = name;
-      document.getElementById("partner-name").textContent = name;
-      nextPage();
-      // cookieに保存
-      document.cookie = `partner=${name}; path=/`;
-    }
-
-    function startGame() {
-      alert(`パートナー「${selectedPartner}」と共に冒険を始めます！`);
-      // ここで本編ゲームに移行
-    }
-  </script>
+<script src="script.js"></script>
 </body>
 </html>
