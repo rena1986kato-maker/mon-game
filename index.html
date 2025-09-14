@@ -34,7 +34,8 @@
       resultDiv.innerHTML = "画像生成中...";
 
       try {
-        const response = await fetch("/generate-image", {
+        // ★ 修正ポイント: /api/generate-image に変更
+        const response = await fetch("/api/generate-image", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ prompt }),
