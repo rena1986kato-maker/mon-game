@@ -22,6 +22,7 @@ export default async function handler(req, res) {
       // デバッグ: Hugging Face からのエラーメッセージを全部返す
       const errText = await response.text();
       console.error("Hugging Face API Error:", errText);
+      resultDiv.innerHTML = `<p style="color:red;">通信エラー: ${errText}</p>`;
       return res.status(response.status).json({ error: errText });
     }
 
