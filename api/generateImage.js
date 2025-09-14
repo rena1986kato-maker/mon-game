@@ -1,5 +1,3 @@
-import fetch from "node-fetch";
-
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -9,21 +7,28 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(
-      "https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5",
+      "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2",
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
-          "Content-Type": "application/json"
+          Authorization: `Bearer ${process.env.HF_API_KEY}`,
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ inputs: prompt, options: { wait_for_model: true } })
+        body: JSON.stringify({ inputs: prompt }),
       }
     );
 
-    const arrayBuffer = await response.arrayBuffer();
-    const base64Image = Buffer.from(arrayBuffer).toString("base64");
+    if (!response.ok) {
+      const errText = await response.text();
+      return res.status(500).json({ error: errText });
+    }
 
-    res.status(200).json({ image: `data:image/png;base64,${base64Image}` });
+    // 画像データを取得
+    const buffer = await response.arrayBuffer();
+    const base64 = Buffer.from(buffer).toString("base64");
+    const imageUrl = `data:image/png;base64,${base64}`;
+
+    res.status(200).json({ imageUrl });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
