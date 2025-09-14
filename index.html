@@ -2,18 +2,57 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>生物探索ゲーム</title>
-  <link rel="stylesheet" href="style.css">
+  <title>OpenAI Image Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #result img {
+      max-width: 400px;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
-  <h1>生物探索ゲーム</h1>
-  <button id="generate">物語を生成</button>
-  <div id="output"></div>
+  <h1>画像生成テスト</h1>
+  <form id="image-form">
+    <label for="prompt">プロンプトを入力してください:</label><br>
+    <input type="text" id="prompt" name="prompt" size="50" required>
+    <button type="submit">生成</button>
+  </form>
 
-  <script src="script.js"></script>
+  <div id="result"></div>
 
-<button id="breedButton">配合する</button>
-<img id="creatureImage" alt="生物画像" />
+  <script>
+    document.getElementById("image-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const prompt = document.getElementById("prompt").value;
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = "画像生成中...";
 
+      try {
+        const response = await fetch("/generate-image", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt }),
+        });
+
+        const data = await response.json();
+
+        if (data.imageUrl) {
+          resultDiv.innerHTML = `<img src="${data.imageUrl}" alt="生成画像">`;
+        } else if (data.error) {
+          resultDiv.innerHTML = `<p style="color:red;">エラー: ${data.error}</p>`;
+        } else {
+          resultDiv.innerHTML = `<p style="color:red;">不明なエラーが発生しました</p>`;
+        }
+      } catch (err) {
+        resultDiv.innerHTML = `<p style="color:red;">通信エラー: ${err.message}</p>`;
+      }
+    });
+  </script>
 </body>
 </html>
