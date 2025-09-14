@@ -7,24 +7,30 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="top-screen">
-  <h1>生物探索ゲーム</h1>
-  <div id="books-container">
-    <div class="book" id="book-lake" data-field="lake">
-      <img src="22DD4CC7-41AD-4EFA-A4AF-A86754F89994.png" alt="湖畔の本">
-    </div>
-    <div class="book" id="book-highland" data-field="highland">
-      <img src="C596DC81-5141-4C88-B697-7FF160AC6245.png" alt="高原の本">
-    </div>
-    <div class="book" id="book-mountain" data-field="mountain">
-      <img src="083FBB2A-8199-4C89-825A-A14F8A2707EF.png" alt="山の本">
+  <!-- 背景 -->
+  <div id="top-screen">
+    <img src="assets/images/bg_parchment.jpg" class="bg" alt="古文書背景">
+
+    <!-- 閉じた本（トップ画面） -->
+    <img src="assets/images/book_closed.png" class="book-cover" alt="閉じた本">
+
+    <!-- 光の演出 -->
+    <img src="assets/images/light_effect.png" class="fx-light" alt="光の演出">
+
+    <!-- メニュー -->
+    <div id="menu-buttons">
+      <img src="assets/images/btn_start.png" class="menu-btn" id="new-game" alt="はじめる">
+      <img src="assets/images/btn_continue.png" class="menu-btn" id="continue-game" alt="つづきから">
+      <img src="assets/images/btn_codex.png" class="menu-btn" id="codex" alt="図鑑">
     </div>
   </div>
-  <div id="start-buttons">
-    <button id="new-game">初めてプレイ</button>
-    <button id="continue-game">途中からプレイ</button>
+
+  <!-- 開いた本（メイン画面） -->
+  <div id="main-screen" style="display:none;">
+    <img src="assets/images/book_open.png" class="book-open" alt="開いた本">
+    <img src="assets/images/creature_base.png" class="creature" alt="初期生物">
+    <!-- ここに物語や選択肢を表示 -->
   </div>
-</div>
 
 <script src="script.js"></script>
 </body>
