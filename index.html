@@ -2,33 +2,71 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>本の中世界チュートリアル</title>
-  <link rel="stylesheet" href="style.css">
+  <title>生物探索ゲーム：導入パート</title>
+  <style>
+    body {
+      font-family: "Yu Gothic", Arial, sans-serif;
+      margin: 20px;
+      background-color: #f0f0f0;
+    }
+    #story {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      background-color: #fff;
+      margin-bottom: 20px;
+      max-width: 700px;
+    }
+    #partner-display {
+      margin-top: 20px;
+    }
+    #partner-image {
+      max-width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    #partner-description {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    .partner-select {
+      margin: 5px;
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    #field-background {
+      margin-top: 20px;
+      max-width: 700px;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
-  <h1>本の中世界チュートリアル</h1>
+  <h1>最初のパートナーを選択</h1>
 
-  <div id="partner-selection">
-    <h2>最初のパートナーを選択してください</h2>
-    <button onclick="selectPartner('リヴァレット')">リヴァレット (湖畔)</button>
-    <button onclick="selectPartner('アルピア')">アルピア (高原)</button>
-    <button onclick="selectPartner('ガルドリング')">ガルドリング (山)</button>
+  <!-- 物語導入 -->
+  <div id="story">
+    <p>
+      あなたは研究者として未知の生物を観察するために、この地に足を踏み入れた。  
+      目の前にはいくつかのフィールドが広がっている。どのパートナーと共に冒険を始めるか選ぶのだ。
+    </p>
   </div>
 
-  <div id="field-view" style="display:none;">
-    <h2 id="field-description"></h2>
-    <img id="partner-image" src="" alt="パートナー">
+  <!-- フィールド背景画像（初期は空） -->
+  <img id="field-background" src="" alt="フィールド背景">
+
+  <!-- パートナー選択ボタン -->
+  <div>
+    <button class="partner-select" data-partner="リヴァレット">リヴァレット（湖畔）</button>
+    <button class="partner-select" data-partner="アルピア">アルピア（高原）</button>
+    <button class="partner-select" data-partner="ガルドリング">ガルドリング（山）</button>
   </div>
 
-  <div id="actions" style="display:none;">
-    <button onclick="observe()">観察</button>
-    <button onclick="movePartner()">移動</button>
-    <button onclick="collectMaterial()">採集</button>
-  </div>
-
-  <div id="notebook" style="display:none;">
-    <h3>研究ノート</h3>
-    <ul id="notes"></ul>
+  <!-- パートナー表示 -->
+  <div id="partner-display">
+    <img id="partner-image" src="" alt="パートナー画像">
+    <div id="partner-description"></div>
   </div>
 
   <script src="script.js"></script>
