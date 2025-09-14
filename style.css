@@ -2,13 +2,30 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Yu Mincho", "Yu Gothic", serif;
-  background: #fdf5e6 url('images/paper-texture.png') repeat;
-  background-size: cover;
+  font-family: "Yu Mincho", "Times New Roman", serif;
+  background: linear-gradient(to bottom, #fdf5e6, #f5e0c8);
   display: flex;
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
+  color: #3b2f2f;
+}
+
+/* 紙っぽい細かい縦線ノイズ */
+body::after {
+  content: "";
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  pointer-events:none;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.02) 0,
+    rgba(255,255,255,0.02) 1px,
+    transparent 1px,
+    transparent 5px
+  );
+  z-index: 0;
 }
 
 /* -------------------- コンテナ -------------------- */
@@ -20,14 +37,16 @@ body {
   margin: 20px 0;
   position: relative;
   overflow-y: auto;      /* 長文はスクロール可能 */
+  z-index: 1;
 }
 
 /* -------------------- ページ -------------------- */
 .page {
   width: 100%;
-  background-color: #fff8dc;
+  background-color: #fcf4e3;
+  border: 2px solid #c9b99f;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15), inset 0 0 10px rgba(0,0,0,0.05);
   padding: 25px 30px;
   position: absolute;
   backface-visibility: hidden;
@@ -37,29 +56,51 @@ body {
   line-height: 1.8;
 }
 
+/* ページ内画像 */
 .page img {
   max-width: 80%;
   display: block;
   margin: 15px auto;
   border-radius: 8px;
+  border: 1px solid #d0c1a0;
+}
+
+/* -------------------- ヘッダー装飾 -------------------- */
+.page h1::after, .page h2::after {
+  content: "∼∼∼";
+  display: block;
+  text-align: center;
+  margin-top: 5px;
+  color: #a58f7f;
 }
 
 /* -------------------- ボタン -------------------- */
 button {
   font-size: 1.1rem;
   padding: 12px 20px;
-  margin: 10px auto;
+  margin: 15px auto;
   border-radius: 10px;
-  border: 1px solid #ccc;
-  background-color: #fffaf0;
-  box-shadow: 1px 2px 4px rgba(0,0,0,0.2);
+  border: 1px solid #b79d7f;
+  background-color: #f7e6d0;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
   cursor: pointer;
   display: block;
 }
 
 button:hover {
-  background-color: #fff0d0;
-  box-shadow: 1px 3px 6px rgba(0,0,0,0.3);
+  background-color: #f2dca8;
+  box-shadow: 2px 3px 6px rgba(0,0,0,0.3);
+}
+
+/* -------------------- ページ影・古紙感 -------------------- */
+.page::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+  pointer-events: none;
+  border-radius: 12px;
 }
 
 /* -------------------- ナビゲーション -------------------- */
