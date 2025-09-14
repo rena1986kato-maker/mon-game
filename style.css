@@ -1,68 +1,33 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Yu Gothic", Arial, sans-serif;
-  background: url('parchment_bg.png') no-repeat center center fixed;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+/* 背景 */
+.bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
-#top-screen {
+/* 閉じた本 */
+.book-cover {
+  display: block;
+  margin: 100px auto 20px;
+  width: 200px;
+  cursor: pointer;
+  transition: transform 1s ease;
+}
+
+/* 本を開くアニメーション */
+.book-cover.open-animation {
+  transform: rotateY(180deg) scale(1.2);
+}
+
+/* メニュー */
+#menu-buttons {
   text-align: center;
-  color: #3b2e1a;
 }
 
-h1 {
-  font-size: 2em;
-  margin-bottom: 20px;
-}
-
-#books-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.book {
-  width: 100px;
-  height: 150px;
+.menu-btn {
+  width: 150px;
+  margin: 10px;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.book img {
-  width: 100%;
-  height: 100%;
-  border: 2px solid #8b6e4e;
-  border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-.book:hover {
-  transform: scale(1.2);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-}
-
-#start-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-#start-buttons button {
-  padding: 10px 20px;
-  font-size: 1em;
-  border: 2px solid #8b6e4e;
-  background-color: #fdf5e6;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-#start-buttons button:hover {
-  background-color: #f5e6c4;
 }
