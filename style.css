@@ -21,6 +21,7 @@ body {
   transform: translate(-50%, -50%);
   cursor: pointer;
   transition: transform 0.6s ease;
+  max-height: 80vh;
 }
 
 .book-cover:hover {
@@ -37,7 +38,7 @@ body {
   max-width: 800px;
   height: auto;
   transform: translate(-50%, -50%);
-  z-index: 2;
+  z-index: 3;
 }
 
 /* 光の演出 */
@@ -45,11 +46,11 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 120%;
-  max-width: 1000px;
+  width: 90%;
+  max-width: 800px;
   opacity: 0;
   transform: translate(-50%, -50%) scale(1.2);
-  z-index: 1;
+  z-index: 2;
   animation: glow 3s infinite;
 }
 
@@ -104,6 +105,10 @@ body {
   }
   .creature {
     width: 100px;
+  }
+  .book-open {
+    width: 95%;
+    max-width: 100%;
   }
 }
 .book-open,
