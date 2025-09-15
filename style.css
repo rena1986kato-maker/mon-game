@@ -118,3 +118,28 @@ body {
   gap: 20px;
   margin-top: 20px;
 }
+
+/* 光の演出をフェードイン */
+.fx-light {
+  display: none; /* 初期は非表示 */
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+/* 表示時にクラスを追加 */
+.fx-light.show {
+  display: block;
+  opacity: 1;
+}
+
+/* 生物も同様にフェードイン */
+.creature {
+  display: none;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.creature.show {
+  display: block;
+  opacity: 1;
+}
