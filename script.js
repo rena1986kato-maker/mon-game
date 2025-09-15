@@ -1,37 +1,44 @@
+// DOMが読み込まれたら実行
 document.addEventListener("DOMContentLoaded", () => {
-  const topScreen = document.getElementById("top-screen");
-  const mainScreen = document.getElementById("main-screen");
   const bookCover = document.querySelector(".book-cover");
+  const bookOpen = document.querySelector(".book-open");
+  const lightFx = document.querySelector(".fx-light");
+  const creature = document.querySelector(".creature");
+  const menuButtons = document.getElementById("menu-buttons");
 
-  const newGameBtn = document.getElementById("new-game");
-  const continueBtn = document.getElementById("continue-game");
-  const codexBtn = document.getElementById("codex");
+  // ボタンは最初は非表示
+  menuButtons.style.display = "none";
 
-  // 閉じた本をクリックすると開く演出
+  // 閉じた本をクリックで演出開始
   bookCover.addEventListener("click", () => {
-    bookCover.classList.add("open-animation");
+    // 閉じた本を消す
+    bookCover.style.display = "none";
+
+    // 開いた本を表示
+    bookOpen.style.display = "block";
+
+    // 少し待って光の演出と生物を表示
     setTimeout(() => {
-      topScreen.style.display = "none";
-      mainScreen.style.display = "block";
-    }, 1000); // 1秒後に本が開いてメイン画面表示
+      lightFx.style.opacity = "1";
+      creature.style.display = "block";
+    }, 1000);
+
+    // さらに待ってボタン表示
+    setTimeout(() => {
+      menuButtons.style.display = "flex";
+    }, 2000);
   });
 
-  // 新規プレイボタン
-  newGameBtn.addEventListener("click", () => {
-    console.log("新規プレイ開始");
-    // Cookieに初期プレイヤー情報を保存
-    // ここで初期生物や物語フラグをセット
+  // ボタンの動作サンプル
+  document.querySelector(".btn-start").addEventListener("click", () => {
+    alert("新しい冒険を始めます！");
   });
 
-  // 続きからプレイ
-  continueBtn.addEventListener("click", () => {
-    console.log("途中からプレイ");
-    // Cookieから情報を読み込む
+  document.querySelector(".btn-continue").addEventListener("click", () => {
+    alert("前回の続きを読み込みます！");
   });
 
-  // 図鑑ボタン
-  codexBtn.addEventListener("click", () => {
-    console.log("図鑑表示");
-    // 図鑑画面へ遷移
+  document.querySelector(".btn-codex").addEventListener("click", () => {
+    alert("図鑑を開きます！");
   });
 });
