@@ -139,10 +139,6 @@ body {
   display: none;
 }
 
-#menu-buttons {
-  display: none;
-}
-
 /* 光の演出フェードイン */
 .fx-light {
   opacity: 0;
