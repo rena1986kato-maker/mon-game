@@ -30,7 +30,7 @@ body {
 
 /* 開いた本（メイン画面演出） */
 .book-open {
-  display: none; /* トップ画面では非表示、JSで切替 */
+  display: none;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -39,7 +39,7 @@ body {
   height: auto;
   transform: translate(-50%, -50%) scale(1.0);
   z-index: 3;
-  animation: rotateLight 6s linear infinite; /* ← 回転アニメーションに変更 */
+  animation: rotateLight 6s linear infinite;
 }
 
 /* 光の演出 */
@@ -77,26 +77,28 @@ body {
   width: 150px;
   height: auto;
   transform: translate(-50%, -50%);
-  display: none; /* 演出で後から表示 */
+  display: none;
   z-index: 3;
 }
+
+/* ボタン群（本の下に横並び） */
 #menu-buttons {
   position: absolute;
-  bottom: 10%;
+  top: calc(50% + 250px); /* 本の中心＋高さの半分（調整可） */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap; /* ← これが折り返しのポイント！ */
+  flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
   z-index: 4;
-  max-width: 90vw; /* 画面幅に収めるための制限 */
+  max-width: 90vw;
 }
 
-
+/* ボタンのスタイル */
 .menu-btn {
-  width: 100px;
+  width: min(100px, 25vw);
   height: auto;
   cursor: pointer;
   transition: transform 0.3s ease, filter 0.3s ease;
@@ -122,36 +124,38 @@ body {
     width: 95%;
     max-width: 100%;
   }
+  #menu-buttons {
+    flex-direction: column;
+    top: calc(50% + 180px);
+    gap: 15px;
+    align-items: center;
+  }
 }
+
+/* 初期非表示設定 */
 .book-open,
 .fx-light,
 .creature {
-  display: none; /* 最初は非表示 */
+  display: none;
 }
 
 #menu-buttons {
-  display: none; /* 最初は非表示 */
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
+  display: none;
 }
 
-/* 光の演出をフェードイン */
+/* 光の演出フェードイン */
 .fx-light {
-  display: none; /* 初期は非表示 */
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
 }
 
-/* 表示時にクラスを追加 */
 .fx-light.show {
   display: block;
   opacity: 1;
 }
 
-/* 生物も同様にフェードイン */
+/* 生物フェードイン */
 .creature {
-  display: none;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
 }
