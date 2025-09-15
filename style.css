@@ -39,7 +39,7 @@ body {
   height: auto;
   transform: translate(-50%, -50%) scale(1.0);
   z-index: 3;
-  animation: glow 3s infinite;
+  animation: rotateLight 6s linear infinite; /* ← 回転アニメーションに変更 */
 }
 
 /* 光の演出 */
@@ -52,6 +52,16 @@ body {
   opacity: 0;
   transform: translate(-50%, -50%) scale(1.05);
   z-index: 2;
+  animation: glow 3s infinite;
+}
+
+@keyframes rotateLight {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 @keyframes glow {
