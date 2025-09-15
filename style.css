@@ -84,7 +84,7 @@ body {
 /* ボタン群（本の下に横並び） */
 #menu-buttons {
   position: absolute;
-  top: calc(50% + 250px); /* 本の中心＋高さの半分（調整可） */
+  top: calc(50% + 250px); /* 本の下に配置（調整可） */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
