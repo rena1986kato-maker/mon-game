@@ -1,49 +1,103 @@
+/* 全体設定 */
 body {
   margin: 0;
   padding: 0;
-  background-image: url('assets/images/bg_parchment.jpg');
-  background-size: cover;
-  background-position: center;
   font-family: 'serif';
-  color: #3b2f2f;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
   position: relative;
 }
 
-/* 開いた本（中央固定） */
+/* 背景 */
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('assets/images/bg_parchment.jpg'); /* ← 修正済み */
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 0;
+}
+.background.show {
+  opacity: 1;
+}
+
+/* 開いた本 */
 .book-open {
   position: absolute;
   top: 50%;
   left: 50%;
   width: 90vw;
   max-width: 600px;
-  transform: translate(-50%, -50%);
-  z-index: 2;
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  transition: opacity 1.2s ease, transform 1.2s ease;
+  z-index: 1;
+}
+.book-open.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
 
-/* 生物画像（本の中央に重ねる） */
+/* 光の演出 */
+.fx-light {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  max-width: 700px;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: 1;
+}
+.fx-light.show {
+  opacity: 0.6;
+  animation: rotateLight 6s linear infinite;
+}
+@keyframes rotateLight {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* 生物アイコン */
 .creature {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 150px;
-  transform: translate(-50%, -50%);
-  z-index: 3;
+  width: 160px;
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0;
+  transition: opacity 1s ease, transform 1s ease;
+  z-index: 2;
+}
+.creature.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
 
-/* ボタン群（本の下に横並び） */
+/* ボタン群 */
 #menu-buttons {
   position: absolute;
-  top: calc(50% + 220px); /* 本の下に配置（調整可） */
+  top: calc(50% + 220px);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(30px);
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 20px;
-  z-index: 4;
+  opacity: 0;
+  transition: opacity 1s ease, transform 1s ease;
+  z-index: 3;
+}
+#menu-buttons.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* ボタン個別 */
@@ -53,7 +107,6 @@ body {
   cursor: pointer;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
-
 .menu-btn:hover {
   transform: scale(1.05);
   filter: brightness(1.2);
