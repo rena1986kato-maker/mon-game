@@ -92,7 +92,7 @@ body {
 }
 
 .menu-btn {
-  width: 200px;
+  width: 100px;
   height: auto;
   cursor: pointer;
   transition: transform 0.3s ease, filter 0.3s ease;
