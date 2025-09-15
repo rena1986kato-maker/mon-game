@@ -1,37 +1,32 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>生物探索ゲーム</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生物探索ゲーム</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <!-- 背景 -->
-  <div id="top-screen">
-    <img src="assets/images/bg_parchment.jpg" class="bg" alt="古文書背景">
+<body style="background-image: url('assets/images/bg_parchment.jpg');">
 
-    <!-- 閉じた本（トップ画面） -->
-    <img src="assets/images/book_closed.png" class="book-cover" alt="閉じた本">
+  <!-- 閉じた本（トップ画面） -->
+  <img src="assets/images/book_closed.PNG" class="book-cover" alt="閉じた本">
 
-    <!-- 光の演出 -->
-    <img src="assets/images/light_effect.png" class="fx-light" alt="光の演出">
+  <!-- 開いた本（メイン画面・演出用） -->
+  <img src="assets/images/book_open.PNG" class="book-open" alt="開いた本">
 
-    <!-- メニュー -->
-    <div id="menu-buttons">
-      <img src="assets/images/btn_start.png" class="menu-btn" id="new-game" alt="はじめる">
-      <img src="assets/images/btn_continue.png" class="menu-btn" id="continue-game" alt="つづきから">
-      <img src="assets/images/btn_codex.png" class="menu-btn" id="codex" alt="図鑑">
-    </div>
+  <!-- 光の演出 -->
+  <img src="assets/images/light_effect.PNG" class="fx-light" alt="光の演出">
+
+  <!-- 初期生物 -->
+  <img src="assets/images/creature_base.PNG" class="creature" alt="初期生物">
+
+  <!-- ボタン類 -->
+  <div id="menu-buttons">
+    <img src="assets/images/btn_start.PNG" class="menu-btn" alt="はじめる">
+    <img src="assets/images/btn_continue.PNG" class="menu-btn" alt="つづきから">
+    <img src="assets/images/btn_codex.PNG" class="menu-btn" alt="図鑑">
   </div>
 
-  <!-- 開いた本（メイン画面） -->
-  <div id="main-screen" style="display:none;">
-    <img src="assets/images/book_open.png" class="book-open" alt="開いた本">
-    <img src="assets/images/creature_base.png" class="creature" alt="初期生物">
-    <!-- ここに物語や選択肢を表示 -->
-  </div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
