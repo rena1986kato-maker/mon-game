@@ -8,7 +8,8 @@ body {
   color: #3b2f2f; /* 茶系で古文書風 */
   text-align: center;
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto; /* ← 縦スクロールを許可 */
 }
 
 /* 閉じた本（トップ画面用） */
@@ -109,7 +110,7 @@ body {
   filter: brightness(1.2);
 }
 
-/* スマホ対応 */
+/* スマホ対応 
 @media (max-width: 600px) {
   .book-cover {
     width: 200px;
@@ -130,7 +131,7 @@ body {
     gap: 15px;
     align-items: center;
   }
-}
+}*/
 
 /* 初期非表示設定 */
 .book-open,
