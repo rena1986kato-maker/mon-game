@@ -10,24 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
   menuButtons.style.display = "none";
 
   // 閉じた本をクリックで演出開始
-  bookCover.addEventListener("click", () => {
-    // 閉じた本を消す
-    bookCover.style.display = "none";
+bookCover.addEventListener("click", () => {
+  bookCover.style.display = "none";
+  bookOpen.style.display = "block";
 
-    // 開いた本を表示
-    bookOpen.style.display = "block";
+  setTimeout(() => {
+    lightFx.classList.add("show");   // 光をフェードイン
+    creature.classList.add("show");  // 生物もフェードイン
+  }, 1000);
 
-    // 少し待って光の演出と生物を表示
-    setTimeout(() => {
-      lightFx.style.opacity = "1";
-      creature.style.display = "block";
-    }, 1000);
-
-    // さらに待ってボタン表示
-    setTimeout(() => {
-      menuButtons.style.display = "flex";
-    }, 2000);
-  });
+  setTimeout(() => {
+    menuButtons.style.display = "flex";
+  }, 2000);
+});
 
   // ボタンの動作サンプル
   document.querySelector(".btn-start").addEventListener("click", () => {
