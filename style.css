@@ -86,10 +86,14 @@ body {
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  flex-direction: row; /* ← ここを変更 */
-  gap: 5px; /* ボタン間の余白を広めに */
+  flex-direction: row;
+  flex-wrap: wrap; /* ← これが折り返しのポイント！ */
+  justify-content: center;
+  gap: 20px;
   z-index: 4;
+  max-width: 90vw; /* 画面幅に収めるための制限 */
 }
+
 
 .menu-btn {
   width: 100px;
