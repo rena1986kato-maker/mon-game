@@ -70,16 +70,14 @@ body {
   display: none; /* 演出で後から表示 */
   z-index: 3;
 }
-
-/* ボタン類 */
 #menu-buttons {
   position: absolute;
   bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  flex-direction: row; /* ← ここを変更 */
+  gap: 30px; /* ボタン間の余白を広めに */
   z-index: 4;
 }
 
