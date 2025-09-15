@@ -17,6 +17,7 @@ bookCover.addEventListener("click", () => {
   setTimeout(() => {
     lightFx.classList.add("show");   // 光をフェードイン
     creature.classList.add("show");  // 生物もフェードイン
+    bookOpen.style.display = "none";
   }, 1000);
 
   setTimeout(() => {
