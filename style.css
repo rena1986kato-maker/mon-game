@@ -106,3 +106,15 @@ body {
     width: 100px;
   }
 }
+.book-open,
+.fx-light,
+.creature {
+  display: none; /* 最初は非表示 */
+}
+
+#menu-buttons {
+  display: none; /* 最初は非表示 */
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
