@@ -1,33 +1,108 @@
-/* 背景 */
-.bg {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-
-/* 閉じた本 */
-.book-cover {
-  display: block;
-  margin: 100px auto 20px;
-  width: 200px;
-  cursor: pointer;
-  transition: transform 1s ease;
-}
-
-/* 本を開くアニメーション */
-.book-cover.open-animation {
-  transform: rotateY(180deg) scale(1.2);
-}
-
-/* メニュー */
-#menu-buttons {
+/* ページ全体の設定 */
+body {
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  background-position: center;
+  font-family: 'serif';
+  color: #3b2f2f; /* 茶系で古文書風 */
   text-align: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* 閉じた本（トップ画面用） */
+.book-cover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: auto;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: transform 0.6s ease;
+}
+
+.book-cover:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* 開いた本（メイン画面演出） */
+.book-open {
+  display: none; /* トップ画面では非表示、JSで切替 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  max-width: 800px;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* 光の演出 */
+.fx-light {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  max-width: 1000px;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.2);
+  z-index: 1;
+  animation: glow 3s infinite;
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.1); }
+  50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.3); }
+}
+
+/* 生物アイコン */
+.creature {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  width: 150px;
+  height: auto;
+  transform: translate(-50%, -50%);
+  display: none; /* 演出で後から表示 */
+  z-index: 3;
+}
+
+/* ボタン類 */
+#menu-buttons {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 4;
 }
 
 .menu-btn {
-  width: 150px;
-  margin: 10px;
+  width: 200px;
+  height: auto;
   cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.menu-btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+/* スマホ対応 */
+@media (max-width: 600px) {
+  .book-cover {
+    width: 200px;
+  }
+  .menu-btn {
+    width: 150px;
+  }
+  .creature {
+    width: 100px;
+  }
 }
