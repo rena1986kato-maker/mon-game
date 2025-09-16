@@ -21,10 +21,21 @@ body {
   z-index: 0;
 }
 
-/* 共通非表示クラス */
-.hidden {
+/* 初期状態：非表示 */
+.book-open,
+.magic-circle,
+.creature,
+.fx-light,
+#menu-buttons {
   opacity: 0;
   pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+/* 表示状態 */
+.fade-in {
+  opacity: 1 !important;
+  pointer-events: auto;
 }
 
 /* 閉じた本 */
@@ -37,7 +48,11 @@ body {
   transform: translate(-50%, -50%);
   cursor: pointer;
   z-index: 2;
-  transition: opacity 0.8s ease;
+  transition: opacity 0.6s ease;
+}
+.book-closed.fade-out {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* 開いた本 */
@@ -49,7 +64,6 @@ body {
   max-width: 600px;
   transform: translate(-50%, -50%);
   z-index: 1;
-  transition: opacity 1s ease;
 }
 
 /* 魔法陣 */
@@ -61,7 +75,6 @@ body {
   max-width: 500px;
   transform: translate(-50%, -50%);
   z-index: 2;
-  transition: opacity 1s ease;
 }
 
 /* 生物 */
@@ -72,7 +85,6 @@ body {
   width: 160px;
   transform: translate(-50%, -50%);
   z-index: 3;
-  transition: opacity 1s ease;
 }
 
 /* 光の演出 */
@@ -84,7 +96,6 @@ body {
   max-width: 700px;
   transform: translate(-50%, -50%);
   z-index: 1;
-  transition: opacity 1s ease;
   animation: rotateLight 6s linear infinite;
 }
 @keyframes rotateLight {
@@ -103,7 +114,6 @@ body {
   justify-content: center;
   gap: 20px;
   z-index: 4;
-  transition: opacity 1s ease;
 }
 
 /* ボタン個別 */
