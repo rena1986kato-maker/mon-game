@@ -1,34 +1,38 @@
 window.addEventListener('load', () => {
   const closedBook = document.querySelector('.book-closed');
+  const bookOpen = document.querySelector('.book-open');
+  const magicCircle = document.querySelector('.magic-circle');
+  const fxLight = document.querySelector('.fx-light');
+  const creature = document.querySelector('.creature');
+  const menuButtons = document.querySelector('#menu-buttons');
 
   closedBook.addEventListener('click', () => {
     // 閉じた本をフェードアウト
-    closedBook.style.opacity = '0';
-    closedBook.style.pointerEvents = 'none';
+    closedBook.classList.add('fade-out');
 
-    // 開いた本を表示
+    // 開いた本をフェードイン
     setTimeout(() => {
-      document.querySelector('.book-open').classList.remove('hidden');
-    }, 500);
+      bookOpen.classList.add('fade-in');
+    }, 600);
 
-    // 魔法陣表示
+    // 魔法陣をフェードイン
     setTimeout(() => {
-      document.querySelector('.magic-circle').classList.remove('hidden');
-    }, 1000);
+      magicCircle.classList.add('fade-in');
+    }, 1200);
 
-    // 光の演出
+    // 光の演出をフェードイン
     setTimeout(() => {
-      document.querySelector('.fx-light').classList.remove('hidden');
-    }, 1500);
+      fxLight.classList.add('fade-in');
+    }, 1800);
 
-    // 生物召喚
+    // 生物をフェードイン
     setTimeout(() => {
-      document.querySelector('.creature').classList.remove('hidden');
-    }, 2000);
+      creature.classList.add('fade-in');
+    }, 2400);
 
-    // ボタン表示
+    // ボタン群をフェードイン
     setTimeout(() => {
-      document.querySelector('#menu-buttons').classList.remove('hidden');
-    }, 2600);
+      menuButtons.classList.add('fade-in');
+    }, 3000);
   });
 });
