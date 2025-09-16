@@ -1,4 +1,3 @@
-/* 全体設定 */
 body {
   margin: 0;
   padding: 0;
@@ -16,15 +15,29 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('assets/images/bg_parchment.jpg'); /* ← 修正済み */
+  background-image: url('assets/images/bg_parchment.jpg');
   background-size: cover;
   background-position: center;
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
   z-index: 0;
 }
-.background.show {
-  opacity: 1;
+
+/* 共通非表示クラス */
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 閉じた本 */
+.book-closed {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60vw;
+  max-width: 400px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 2;
+  transition: opacity 0.8s ease;
 }
 
 /* 開いた本 */
@@ -34,14 +47,32 @@ body {
   left: 50%;
   width: 90vw;
   max-width: 600px;
-  transform: translate(-50%, -50%) scale(0.9);
-  opacity: 0;
-  transition: opacity 1.2s ease, transform 1.2s ease;
+  transform: translate(-50%, -50%);
   z-index: 1;
+  transition: opacity 1s ease;
 }
-.book-open.show {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+
+/* 魔法陣 */
+.magic-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80vw;
+  max-width: 500px;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  transition: opacity 1s ease;
+}
+
+/* 生物 */
+.creature {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160px;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  transition: opacity 1s ease;
 }
 
 /* 光の演出 */
@@ -52,12 +83,8 @@ body {
   width: 100vw;
   max-width: 700px;
   transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 1s ease;
   z-index: 1;
-}
-.fx-light.show {
-  opacity: 0.6;
+  transition: opacity 1s ease;
   animation: rotateLight 6s linear infinite;
 }
 @keyframes rotateLight {
@@ -65,39 +92,18 @@ body {
   to   { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* 生物アイコン */
-.creature {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 160px;
-  transform: translate(-50%, -50%) scale(0.8);
-  opacity: 0;
-  transition: opacity 1s ease, transform 1s ease;
-  z-index: 2;
-}
-.creature.show {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
 /* ボタン群 */
 #menu-buttons {
   position: absolute;
   top: calc(50% + 220px);
   left: 50%;
-  transform: translateX(-50%) translateY(30px);
+  transform: translateX(-50%);
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 20px;
-  opacity: 0;
-  transition: opacity 1s ease, transform 1s ease;
-  z-index: 3;
-}
-#menu-buttons.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  z-index: 4;
+  transition: opacity 1s ease;
 }
 
 /* ボタン個別 */
