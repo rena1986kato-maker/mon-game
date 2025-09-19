@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (result && result.error) {
   // ❌ 生成失敗（エラーあり）
        console.error('生成エラー:', result.error);
-       imageContainer.innerHTML = `<p style="color:red;">生成に失敗しました: ${result.error}</p>`;
+       imageContainer.innerHTML = result.error + `<p style="color:red;">生成に失敗しました: ${result.error}</p>`;
      } else {
   // ❓ 不明な状態（遅延中 or 空レスポンス）
       console.warn('レスポンスが不完全です:', result);
