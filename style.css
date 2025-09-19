@@ -1,3 +1,49 @@
+/* 入力欄・ボタン・画像をまとめて先頭に配置 */
+#ui-top {
+  position: relative;
+  z-index: 10;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.6); /* 半透明背景で視認性UP */
+  color: #f0e6d2;
+  font-family: 'Cinzel', serif;
+}
+
+/* 入力欄 */
+#prompt-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  border: 1px solid #f0e6d2;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #f0e6d2;
+}
+
+/* ボタン */
+#generate-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: 1px solid #f0e6d2;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #f0e6d2;
+  cursor: pointer;
+}
+
+/* 生成画像 */
+#image-container img {
+  max-width: 100%;
+  margin-top: 20px;
+  border: 2px solid #f0e6d2;
+  box-shadow: 0 0 10px rgba(255, 255, 200, 0.5);
+}
+
+
+
+
+
 body {
   margin: 0;
   padding: 0;
