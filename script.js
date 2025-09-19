@@ -12,12 +12,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       img.src = data.image;
       img.className = 'generated-image-top';
       img.alt = '生成画像';
-      document.body.insertBefore(img, document.body.firstChild);
+      const container = document.getElementById('image-container');
+      container.innerHTML = ''; // 前の画像を消す
+      container.appendChild(img);
     }
   } catch (err) {
     console.error('画像取得エラー:', err);
   }
 });
+
 
 
 
