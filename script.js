@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   const generatedImg = document.createElement('img');
   generatedImg.src = '/images/generated.png?' + Date.now(); // キャッシュ回避
-  generatedImg.className = 'generated-image';
+  generatedImg.className = 'generated-image-top';
   generatedImg.alt = '生成画像';
 
-  // 表示位置を調整（例：魔法陣の上に重ねる）
-  const magicCircle = document.querySelector('.magic-circle');
-  magicCircle.insertAdjacentElement('afterend', generatedImg);
+  // bodyの最初に挿入（最上部表示）
+  document.body.insertBefore(generatedImg, document.body.firstChild);
 });
+
 
 
 
