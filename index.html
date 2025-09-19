@@ -9,6 +9,23 @@
 <body>
 <div id="image-container"></div>
 
+<script>
+  fetch('/api/generate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt: '魔法陣が描かれた古代の羊皮紙' })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log(data.image.length);
+    const img = document.createElement('img');
+    img.src = data.image;
+    img.style.maxWidth = '100%';
+    document.getElementById('image-container').appendChild(img);
+  });
+</script>
+
+
   <!-- 背景 -->
   <div class="background"></div>
 
