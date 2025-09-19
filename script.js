@@ -1,12 +1,24 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const generatedImg = document.createElement('img');
-  generatedImg.src = '/images/generated.png?' + Date.now(); // キャッシュ回避
-  generatedImg.className = 'generated-image-top';
-  generatedImg.alt = '生成画像';
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const res = await fetch('/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: '魔法陣が描かれた古代の羊皮紙' })
+    });
 
-  // bodyの最初に挿入（最上部表示）
-  document.body.insertBefore(generatedImg, document.body.firstChild);
+    const data = await res.json();
+    if (data.image) {
+      const img = document.createElement('img');
+      img.src = data.image;
+      img.className = 'generated-image-top';
+      img.alt = '生成画像';
+      document.body.insertBefore(img, document.body.firstChild);
+    }
+  } catch (err) {
+    console.error('画像取得エラー:', err);
+  }
 });
+
 
 
 
