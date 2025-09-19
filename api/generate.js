@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default async function handler(req, res) {
   const API_TOKEN = process.env.HUGGINGFACE_TOKEN;
-  const MODEL_URL = 'https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2-1';
+  const MODEL_URL = 'https://huggingface.co/runwayml/stable-diffusion-v1-5';
   const prompt = req.body?.prompt || '魔法陣が描かれた古代の羊皮紙';
 
   try {
