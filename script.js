@@ -1,19 +1,14 @@
-document.querySelector('.menu-btn[alt="Codex"]').addEventListener('click', async () => {
-  const res = await fetch('/generate', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt: '魔法陣が描かれた古代の羊皮紙' })
-  });
+document.addEventListener('DOMContentLoaded', () => {
+  const generatedImg = document.createElement('img');
+  generatedImg.src = '/images/generated.png?' + Date.now(); // キャッシュ回避
+  generatedImg.className = 'generated-image';
+  generatedImg.alt = '生成画像';
 
-  const data = await res.json();
-  if (data.status === 'ok') {
-    const img = document.createElement('img');
-    img.src = data.imageUrl + '?' + Date.now(); // キャッシュ回避
-    img.className = 'generated-image';
-    img.alt = '生成画像';
-    document.body.appendChild(img);
-  }
+  // 表示位置を調整（例：魔法陣の上に重ねる）
+  const magicCircle = document.querySelector('.magic-circle');
+  magicCircle.insertAdjacentElement('afterend', generatedImg);
 });
+
 
 
 window.addEventListener('load', () => {
