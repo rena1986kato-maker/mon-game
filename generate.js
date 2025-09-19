@@ -5,7 +5,7 @@ const path = require('path');
 const API_TOKEN = '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';
 const MODEL_URL = 'https://api-inference.huggingface.co/models/hakurei/waifu-diffusion';
 
-async function generateImage(prompt = '魔法陣が描かれた古代の羊皮紙') {
+async function generateImage(prompt = 'モンスター') {
   try {
     const response = await axios.post(
       MODEL_URL,
