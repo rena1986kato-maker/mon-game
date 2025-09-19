@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
       imageContainer.appendChild(img);
     } catch (err) {
       console.error('画像生成エラー:', err);
-      imageContainer.innerHTML = `<p style="color:red;">画像生成に失敗しました</p>`;
+      imageContainer.innerHTML = err + `<p style="color:red;">画像生成に失敗しました</p>`;
     }
   });
 });
