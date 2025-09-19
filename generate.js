@@ -2,7 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
-const API_TOKEN = 'hf_あなたのトークン';
+const API_TOKEN = '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';
 const MODEL_URL = 'https://api-inference.huggingface.co/models/hakurei/waifu-diffusion';
 
 async function generateImage(prompt = '魔法陣が描かれた古代の羊皮紙') {
