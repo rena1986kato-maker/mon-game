@@ -4,18 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const imageContainer = document.getElementById('image-container');
 
   generateButton.addEventListener('click', async () => {
-    const prompt = promptInput.value || '魔法陣が描かれた古代の羊皮紙';
+    const prompt = promptInput.value || '魔法陣';
     imageContainer.innerHTML = '<p>🧙‍♂️ 魔法陣を描いています…</p>';
 
     try {
-      const res = await fetch('https://修義-magic-circle-generator.hf.space/run/predict', {
+      const res = await fetch('https://nobuyoshi1102-magic-circle-generator.hf.space/run/predict', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data: [prompt] })
       });
 
       const result = await res.json();
-      const imageUrl = result.data[0];
+      const imageUrl = result.data[0]; // Base64形式の画像URL
 
       const img = document.createElement('img');
       img.src = imageUrl;
