@@ -33,7 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
      } else {
   // ❓ 不明な状態（遅延中 or 空レスポンス）
       console.warn('レスポンスが不完全です:', result);
-      imageContainer.innerHTML = result + `<p>画像がまだ返ってきていません。しばらくお待ちください。</p>`;
+      imageContainer.innerHTML = `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+
+      imageContainer.innerHTML = `<p>画像がまだ返ってきていません。しばらくお待ちください。</p>`;
      }
     } catch (err) {
       console.error('画像生成エラー:', err);
