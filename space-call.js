@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     imageContainer.innerHTML = '<p>🧙‍♂️ 魔法陣を描いています…</p>';
 
     try {
-      const res = await fetch('https://nobuyoshi1102-magic-circle-generator.hf.space/run/predict', {
+
+      const res = await fetch('https://nobuyoshi1102-magic-circle-generator.hf.space/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data: [prompt] })
