@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default async function handler(req, res) {
   const API_TOKEN = process.env.HUGGINGFACE_TOKEN;
-  const MODEL_URL = 'https://api-inference.huggingface.co/models/hakurei/waifu-diffusion';
+  const MODEL_URL = 'https://api-inference.huggingface.co/models/Linaqruf/anything-v3.0';
   const prompt = req.body?.prompt || '魔法陣が描かれた古代の羊皮紙';
 
   try {
