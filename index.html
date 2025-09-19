@@ -7,23 +7,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<input type="text" id="prompt-input" placeholder="魔法陣が描かれた古代の羊皮紙" />
+<button id="generate-button">生成する</button>
 <div id="image-container"></div>
 
-<script>
-  fetch('/api/generate', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt: '魔法陣が描かれた古代の羊皮紙' })
-  })
-  .then(res => res.json())
-  .then(data => {
-    console.log(data.image.length);
-    const img = document.createElement('img');
-    img.src = data.image;
-    img.style.maxWidth = '100%';
-    document.getElementById('image-container').appendChild(img);
-  });
-</script>
+<script src="space-call.js"></script>
+
 
 
   <!-- 背景 -->
