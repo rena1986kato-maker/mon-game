@@ -1,21 +1,27 @@
-import OpenAI from "openai";
+import axios from 'axios';
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
-  const { prompt } = req.body;
+  const API_TOKEN = process.env.HUGGINGFACE_TOKEN;
+  const MODEL_URL = 'https://api-inference.huggingface.co/models/hakurei/waifu-diffusion';
+  const prompt = req.body?.prompt || '魔法陣が描かれた古代の羊皮紙';
 
   try {
-    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: prompt }]
-    });
+    const response = await axios.post(
+      MODEL_URL,
+      { inputs: prompt },
+      {
+        headers: {
+          Authorization: `Bearer ${API_TOKEN}`,
+          'Content-Type': 'application/json'
+        },
+        responseType: 'arraybuffer'
+      }
+    );
 
-    res.status(200).json({ result: completion.choices[0].message.content });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    const base64Image = Buffer.from(response.data).toString('base64');
+    res.status(200).json({ image: `data:image/png;base64,${base64Image}` });
+  } catch (error) {
+    console.error('画像生成エラー:', error.response?.data || error.message);
+    res.status(500).json({ error: '画像生成に失敗しました' });
   }
 }
