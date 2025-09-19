@@ -15,15 +15,26 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       const result = await res.json();
-      const imageUrl = result.data[0]; // Base64形式の画像URL
+　　　　if (result && result.data && result.data[0]) {
+  // ✅ 画像生成成功
+       const imageUrl = result.data[0]; // Base64形式の画像URL
 
-      const img = document.createElement('img');
-      img.src = imageUrl;
-      img.alt = '生成画像';
-      img.className = 'generated-image-top';
+       const img = document.createElement('img');
+       img.src = imageUrl;
+       img.alt = '生成画像';
+       img.className = 'generated-image-top';
 
-      imageContainer.innerHTML = '';
-      imageContainer.appendChild(img);
+       imageContainer.innerHTML = '';
+       imageContainer.appendChild(img);
+      } else if (result && result.error) {
+  // ❌ 生成失敗（エラーあり）
+       console.error('生成エラー:', result.error);
+       imageContainer.innerHTML = `<p style="color:red;">生成に失敗しました: ${result.error}</p>`;
+     } else {
+  // ❓ 不明な状態（遅延中 or 空レスポンス）
+      console.warn('レスポンスが不完全です:', result);
+      imageContainer.innerHTML = `<p>画像がまだ返ってきていません。しばらくお待ちください。</p>`;
+     }
     } catch (err) {
       console.error('画像生成エラー:', err);
       imageContainer.innerHTML = err + `<p style="color:red;">画像生成に失敗しました</p>`;
