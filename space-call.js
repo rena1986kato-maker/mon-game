@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.warn('レスポンスが不完全です:', result);
       imageContainer.innerHTML = `<pre>${JSON.stringify(result, null, 2)}</pre>`;
 
-      imageContainer.innerHTML = `<p>画像がまだ返ってきていません。しばらくお待ちください。</p>`;
+      imageContainer.innerHTML = JSON.stringify(result, null, 2) + `<p>画像がまだ返ってきていません。しばらくお待ちください。</p>`;
      }
     } catch (err) {
       console.error('画像生成エラー:', err);
