@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const blob = await res.blob();
+      console.log("Blob size:", blob.size); // ✅ ここでサイズ確認
+
       const imageUrl = URL.createObjectURL(blob);
 
       const img = document.createElement('img');
@@ -27,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       img.className = 'generated-image-top';
       img.onload = () => URL.revokeObjectURL(imageUrl); // ✅ メモリ解放
 
-      imageContainer.innerHTML = '';
+      imageContainer.innerHTML = 'blob.size';
       imageContainer.appendChild(img);
     } catch (err) {
       console.error('画像生成エラー:', err);
