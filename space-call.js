@@ -14,12 +14,22 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({ prompt: prompt })
       });
 
+      const contentType = res.headers.get('content-type') || '';
+      console.log("Content-Type:", contentType);
+
       if (!res.ok) {
-        throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+        // エラー応答をJSONとして処理
+        const error = await res.json();
+        throw new Error(error.error || `HTTP ${res.status}: ${res.statusText}`);
+      }
+
+      if (contentType.includes('application/json')) {
+        const error = await res.json();
+        throw new Error(error.error || '画像生成に失敗しました');
       }
 
       const blob = await res.blob();
-      console.log("Blob size:", blob.size); // ✅ ここでサイズ確認
+      console.log("Blob size:", blob.size);
 
       const imageUrl = URL.createObjectURL(blob);
 
@@ -27,13 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
       img.src = imageUrl;
       img.alt = '生成画像';
       img.className = 'generated-image-top';
-      img.onload = () => URL.revokeObjectURL(imageUrl); // ✅ メモリ解放
+      img.onload = () => URL.revokeObjectURL(imageUrl);
 
       imageContainer.innerHTML = '';
       imageContainer.appendChild(img);
     } catch (err) {
       console.error('画像生成エラー:', err);
-      imageContainer.innerHTML = err + `<p style="color:red;">画像生成に失敗しました</p><pre>${err.message}</pre>`;
+      imageContainer.innerHTML = `<p style="color:red;">画像生成に失敗しました</p><pre>${err.message}</pre>`;
     }
   });
 });
