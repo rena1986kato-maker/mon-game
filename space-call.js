@@ -92,12 +92,11 @@ let timerStart;
 
 function startWaitTimer() {
   timerStart = Date.now();
-  const timerDisplay = document.getElementById('wait-timer');
-  logToScreen('⏳ 待機時間: ${elapsed}');
+  logToScreen('⏳ 待機時間: 0秒');
 
   timerInterval = setInterval(() => {
     const elapsed = Math.floor((Date.now() - timerStart) / 1000);
-    logToScreen('⏳ 待機時間: ${elapsed}秒`);
+    logToScreen(`⏳ 待機時間: ${elapsed}秒`);
   }, 1000);
 }
 
