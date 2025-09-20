@@ -24,7 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       logToScreen("📡 APIにリクエスト送信中…");
 
-      const res = await fetch('https://nobuyoshi1102-shuyoshi-sd-api.hf.space/generate', {
+        startWaitTimer(); // fetch前に開始
+        const res = await fetch('https://nobuyoshi1102-shuyoshi-sd-api.hf.space/generate', {
+        stopWaitTimer(); // レスポンス受信後に停止
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: prompt })
@@ -86,3 +88,22 @@ function logToScreen(message) {
   p.style.color = '#555';
   logArea.appendChild(p);
 }
+let timerInterval;
+let timerStart;
+
+function startWaitTimer() {
+  timerStart = Date.now();
+  const timerDisplay = document.getElementById('wait-timer');
+  logToScreen('⏳ 待機時間: ${elapsed}');
+
+  timerInterval = setInterval(() => {
+    const elapsed = Math.floor((Date.now() - timerStart) / 1000);
+    logToScreen('⏳ 待機時間: ${elapsed}秒`);
+  }, 1000);
+}
+
+function stopWaitTimer() {
+  clearInterval(timerInterval);
+}
+
+
