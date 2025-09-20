@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
 
-      const res = await fetch('https://nobuyoshi1102-magic-circle-generator.hf.space/generate', {
+      const res = await fetch('https://nobuyoshi1102-shuyoshi-sd-api.hf.space/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data: [prompt] })
