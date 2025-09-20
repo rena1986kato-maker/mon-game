@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error(`HTTP ${res.status}: ${res.statusText}`);
       }
 
+　　　　const text = await res.text();
+      console.log("Raw response:", text);
+
       const blob = await res.blob();
       console.log("Blob size:", blob.size); // ✅ ここでサイズ確認
 
@@ -29,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       img.className = 'generated-image-top';
       img.onload = () => URL.revokeObjectURL(imageUrl); // ✅ メモリ解放
 
-      imageContainer.innerHTML = blob.size;
+      imageContainer.innerHTML = text;
       //imageContainer.appendChild(img);
     } catch (err) {
       console.error('画像生成エラー:', err);
