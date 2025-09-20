@@ -24,14 +24,13 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       logToScreen("📡 APIにリクエスト送信中…");
 
-        startWaitTimer(); // fetch前に開始
-        const res = await fetch('https://nobuyoshi1102-shuyoshi-sd-api.hf.space/generate', {
-        stopWaitTimer(); // レスポンス受信後に停止
+      startWaitTimer(); // fetch前に開始
+      const res = await fetch('https://nobuyoshi1102-shuyoshi-sd-api.hf.space/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: prompt })
       });
-
+      stopWaitTimer(); // レスポンス受信後に停止
       logToScreen("📬 レスポンス受信: " + res.status + " " + res.statusText);
 
       const contentType = res.headers.get('content-type') || '';
