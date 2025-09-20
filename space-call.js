@@ -37,4 +37,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!res.ok) {
         const error = await res.json();
-        logToScreen("❌ API
+        logToScreen("❌ APIエラー: " + JSON.stringify(error));
+        throw new Error(error.error || `HTTP ${res.status}: ${res.statusText}`);
+      }
+
+      if (contentType.includes('application/json')) {
+        const error = await res.json();
+        logToScreen("⚠️ JSONエラー応答: " + JSON.stringify(error));
+        throw new Error(error.error || '画像生成に失敗しました');
+      }
+
+      const blob = await res.blob();
+      logToScreen("🖼️ Blobサイズ: " + blob.size);
+
+      const imageUrl = URL.createObjectURL(blob);
+      logToScreen("🔗 Blob URL生成: " + imageUrl);
+
+      const img = document.createElement('img');
+      img.src = imageUrl;
+      img.alt = '生成画像';
+      img.className = 'generated-image-top';
+
+      img.onload = () => {
+        logToScreen("✅ 画像読み込み成功");
+        URL.revokeObjectURL(imageUrl);
+      };
+
+      img.onerror = () => {
+        logToScreen("❌ 画像読み込み失敗");
+        imageContainer.innerHTML = `<p style="color:red;">画像の読み込みに失敗しました</p>`;
+      };
+
+      imageContainer.innerHTML = '';
+      imageContainer.appendChild(img);
+    } catch (err) {
+      logToScreen("❗️画像生成エラー: " + err.message);
+      imageContainer.innerHTML = `<p style="color:red;">画像生成に失敗しました</p><pre>${err.message}</pre>`;
+    }
+  });
+});
+
+// グローバル logToScreen 関数
+function logToScreen(message) {
+  if (!logArea) return;
+  const p = document.createElement('p');
+  p.textContent = message;
+  p.style.fontSize = '12px';
+  p.style.color = '#555';
+  logArea.appendChild(p);
+}
