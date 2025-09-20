@@ -97,7 +97,7 @@ function startWaitTimer() {
   timerInterval = setInterval(() => {
     const elapsed = Math.floor((Date.now() - timerStart) / 1000);
     logToScreen(`⏳ 待機時間: ${elapsed}秒`);
-  }, 1000);
+  }, 30000);
 }
 
 function stopWaitTimer() {
