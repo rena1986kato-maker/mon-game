@@ -18,22 +18,19 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error(`HTTP ${res.status}: ${res.statusText}`);
       }
 
-　　　　const text = await res.text();
-      console.log("Raw response:", text);
+      const blob = await res.blob();
+      console.log("Blob size:", blob.size); // ✅ ここでサイズ確認
 
-      //const blob = await res.blob();
-      //console.log("Blob size:", blob.size); // ✅ ここでサイズ確認
+      const imageUrl = URL.createObjectURL(blob);
 
-      //const imageUrl = URL.createObjectURL(blob);
+      const img = document.createElement('img');
+      img.src = imageUrl;
+      img.alt = '生成画像';
+      img.className = 'generated-image-top';
+      img.onload = () => URL.revokeObjectURL(imageUrl); // ✅ メモリ解放
 
-      //const img = document.createElement('img');
-      //img.src = imageUrl;
-      //img.alt = '生成画像';
-      //img.className = 'generated-image-top';
-      //img.onload = () => URL.revokeObjectURL(imageUrl); // ✅ メモリ解放
-
-      imageContainer.innerHTML = text;
-      //imageContainer.appendChild(img);
+      imageContainer.innerHTML = '';
+      imageContainer.appendChild(img);
     } catch (err) {
       console.error('画像生成エラー:', err);
       imageContainer.innerHTML = err + `<p style="color:red;">画像生成に失敗しました</p><pre>${err.message}</pre>`;
