@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch('https://nobuyoshi1102-shuyoshi-sd-api.hf.space/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: prompt }) // ✅ FastAPI形式
+        body: JSON.stringify({ prompt: prompt })
       });
 
       if (!res.ok) {
@@ -25,12 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
       img.src = imageUrl;
       img.alt = '生成画像';
       img.className = 'generated-image-top';
+      img.onload = () => URL.revokeObjectURL(imageUrl); // ✅ メモリ解放
 
       imageContainer.innerHTML = '';
       imageContainer.appendChild(img);
     } catch (err) {
       console.error('画像生成エラー:', err);
-      imageContainer.innerHTML = err + `<p style="color:red;">画像生成に失敗しました</p><pre>${err}</pre>`;
+      imageContainer.innerHTML = `<p style="color:red;">画像生成に失敗しました</p><pre>${err.message}</pre>`;
     }
   });
 });
