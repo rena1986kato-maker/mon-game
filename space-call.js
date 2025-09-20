@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
       img.className = 'generated-image-top';
       img.onload = () => URL.revokeObjectURL(imageUrl); // ✅ メモリ解放
 
-      imageContainer.innerHTML = 'blob.size';
-      imageContainer.appendChild(img);
+      imageContainer.innerHTML = blob.size;
+      //imageContainer.appendChild(img);
     } catch (err) {
       console.error('画像生成エラー:', err);
       imageContainer.innerHTML = err + `<p style="color:red;">画像生成に失敗しました</p><pre>${err.message}</pre>`;
